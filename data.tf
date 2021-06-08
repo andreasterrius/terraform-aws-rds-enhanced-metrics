@@ -10,9 +10,16 @@ data "aws_iam_policy_document" "allow_decrypt" {
 
     actions = [
       "kms:Decrypt",
+      "ssm:GetParameters",
+      "ssm:GetParameter",
+      "ssm:GetParameterHistory",
+      "ssm:GetParametersByPath",
     ]
 
-    resources = [var.datadog_kms_key_arn]
+    resources = [
+      var.datadog_kms_key_arn,
+      var.datadog_api_key_parameter_store_arn
+    ]
   }
 }
 
